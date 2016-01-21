@@ -1,12 +1,24 @@
 var TCITLocalApi = require('./index.js');
+var fs = require("fs");
 
-var localapiMgr = new TCITLocalApi();
+var localapiController = new TCITLocalApi();
 
-if (!localapiMgr.setServerInfo('localhost', 8800)) {
+if (!localapiController.setServerInfo('localhost', 8800)) {
     console.log("Set Server Information Error");
 } else {
-    console.log("Create and Delete Face Track ID");
-    // localapiMgr.createFaceTrack().then(function(res) {
+    console.log("Set Server Information Success"); 
+}
+
+
+var buffer = fs.readFileSync('./image/lena.jpg');
+localapiController.imageBufferUpload(buffer).then(function(res) {
+    var imgId = res;
+    console.log("img_id = " + imgId);
+}).catch(function(error) {
+    console.log(error);
+});
+
+// localapiMgr.createFaceTrack().then(function(res) {
     //     var trackId = res;
     //     console.log("Create Track ID = " + trackId);
     //     localapiMgr.deleteFaceTrack(trackId).then(function(res) {
@@ -38,8 +50,6 @@ if (!localapiMgr.setServerInfo('localhost', 8800)) {
     // }).catch(function(error) {
     //     console.log(error);
     // });
-}
-
 
 process.on('SIGINT', function() {
     process.exit();

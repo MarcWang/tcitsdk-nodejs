@@ -60,34 +60,46 @@ var localapi = function() {
 
 }
 
+
 localapi.prototype.getVersion = function() {
     var self = this;
     return self.version;
 }
 
+/*
+ * @param {string} host
+ * @param {number} port
+ */
 localapi.prototype.setServerInfo = function(host, port) {
     var self = this;
-
-    if (typeof(host) == 'undefined' || typeof(port) == 'undefined') {
-        return false;
-    } else {
+    if (typeof(host) == 'string' && typeof(port) == 'number') {
         self.server.host = host;
         self.server.port = port;
         return true;
+    } else {
+        return false;
     }
 }
 
+/* [API] Storage Upload
+ * @param {object} buffer
+ * @return {string} img_id
+ */
 localapi.prototype.imageBufferUpload = function(buffer) {
     var self = this;
     return new Promise(function(resolve, reject) {
-        var data = {
+        if (typeof(buffer) != 'object') {
+            reject('NodeJS SDK Error');
+        }
+
+        var postData = {
             image: {
                 buffer: buffer,
                 content_type: 'image/jpeg'
             }
         }
 
-        needle.post('http://' + self.server.host + ':' + self.server.port + TCIT_API_STORAGE_UPLOAD, data, {
+        needle.post('http://' + self.server.host + ':' + self.server.port + TCIT_API_STORAGE_UPLOAD, postData, {
             multipart: true
         }, function(err, resp, body) {
             if (err) {
@@ -96,18 +108,23 @@ localapi.prototype.imageBufferUpload = function(buffer) {
                 var imgId = body.img_id;
                 resolve(imgId);
             } else {
-                reject({
-                    error: 'TCIT LocalAPI Response',
-                    code: body.state
-                });
+                reject('TCIT LocalAPI Response');
             }
         });
     });
 }
 
+/* [API] Storage Upload
+ * @param {string} path
+ * @return {string} img_id
+ */
 localapi.prototype.imagePathUpload = function(path) {
     var self = this;
     return new Promise(function(resolve, reject) {
+        if (typeof(path) != 'string') {
+            reject('NodeJS SDK Error');
+        }
+
         var data = {
             image: {
                 file: path,
@@ -124,19 +141,25 @@ localapi.prototype.imagePathUpload = function(path) {
                 var imgId = body.img_id;
                 resolve(imgId);
             } else {
-                reject({
-                    error: 'TCIT LocalAPI Response',
-                    code: body.state
-                });
+                reject('TCIT LocalAPI Response');
             }
         });
     });
 }
 
-//[API] Face Detection
+/* [API] Face Detection
+ * @param {string} imgId
+ * @param {string} img (BASE64)
+ * @param {string} trackId
+ * @return {object} faces
+ */
 localapi.prototype.faceDetect = function(imgId, img, trackId) {
     var self = this;
     return new Promise(function(resolve, reject) {
+        if (typeof(imgId) != 'string' && typeof(img) != 'string') {
+            reject('NodeJS SDK Error');
+        }
+
         var data = {
             img_id: imgId,
             image: img,
@@ -151,20 +174,18 @@ localapi.prototype.faceDetect = function(imgId, img, trackId) {
                     var faces = body.faces;
                     resolve(faces);
                 } else {
-                    reject({
-                        error: 'TCIT LocalAPI Response',
-                        code: body.state
-                    });
+                    reject('TCIT LocalAPI Response');
                 }
             });
     });
 }
 
-//[API] Create Face Tracked Detection
+/* [API] Create Face Tracked Detection
+ * @return {string} track_id
+ */
 localapi.prototype.createFaceTrack = function() {
     var self = this;
     return new Promise(function(resolve, reject) {
-
         needle.get('http://' + self.server.host + ':' + self.server.port + TCIT_API_FACE_CREATE_TRACK,
             function(err, resp, body) {
                 if (err) {
@@ -173,20 +194,22 @@ localapi.prototype.createFaceTrack = function() {
                     var trackId = body.track_id;
                     resolve(trackId);
                 } else {
-                    reject({
-                        error: 'TCIT LocalAPI Response',
-                        code: body.state
-                    });
+                    reject('TCIT LocalAPI Response');
                 }
             });
     });
 }
 
-//[API] Delete Face Tracked Detection
+/* [API] Delete Face Tracked Detection
+ * @param {string} trackId
+ * @return {boolean} true
+ */
 localapi.prototype.deleteFaceTrack = function(trackId) {
     var self = this;
     return new Promise(function(resolve, reject) {
-
+        if (typeof(trackId) != 'string') {
+            reject('NodeJS SDK Error');
+        }
         var data = {
             track_id: trackId
         }
@@ -195,22 +218,26 @@ localapi.prototype.deleteFaceTrack = function(trackId) {
                 if (err) {
                     reject(err);
                 } else if (body.state == TCIT_STATE_SUCCESSFUL) {
-                    resolve(body.state);
+                    resolve(true);
                 } else {
-                    reject({
-                        error: 'TCIT LocalAPI Response',
-                        code: body.state
-                    });
+                    reject('TCIT LocalAPI Response');
                 }
             });
     });
 }
 
-//[API] Face Comparison
+/* [API] Face Comparison
+ * @param {string} faceId1
+ * @param {string} faceId2
+ * @return {number} similarity
+ */
 localapi.prototype.faceCompare = function(faceId1, faceId2) {
     var self = this;
     return new Promise(function(resolve, reject) {
 
+        if (typeof(faceId1) != 'string' || typeof(faceId2) != 'string') {
+            reject('NodeJS SDK Error');
+        }
         var data = {
             face_id1: faceId1,
             face_id2: faceId2
@@ -223,10 +250,7 @@ localapi.prototype.faceCompare = function(faceId1, faceId2) {
                 var score = body.similarity;
                 resolve(score);
             } else {
-                reject({
-                    error: 'TCIT LocalAPI Response',
-                    code: body.state
-                });
+                reject('TCIT LocalAPI Response');
             }
         });
     });
