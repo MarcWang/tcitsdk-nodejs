@@ -1,0 +1,26 @@
+{
+    "face": {
+        "groups": [{
+            "id": "GROUP_ID_TEMP"
+        }],
+        "persons": [{
+            "id": "PERSON_ID_ANN",
+            "faces": [{
+                "face_id": "FACE_ID_TEMP",
+                "featureData": "/0L/9v1W+AEa++QZIuMiCAUIC/kk/PHfB9wY7ODn+/gkIMsArUbdBcPz6igu/vMFG9wYJPDx8srIGgvUIyLU8OMr4M4p7fYkGNsR5hsU+vQGBg7jKkr1Pu1I1u8K/CMgDQAAAAAAAAAAAAAAAACwAAAAUka87D87MT82QicgBwAAADiLFuznDtnz3fHfBAgi09bgWk7o7SLuRf9C//b9VvgBGvvkLv7zBRvcGCTw8fLKyBoL1CMi1PDjK1X7AAMDCBUkHB//8PX8DdQxAzcM5yXgzint9iQY2xHmGw=="
+            }],
+            "groups": [
+                "GROUP_ID_TEMP"
+            ]
+        }, {
+            "id": "PERSON_ID_PATTY",
+            "faces": [{
+                "face_id": "FACE_ID_TEMP",
+                "featureData": "zgYO4N/QM/AbPQTSFAcVAAUl5wAbT+LxH/sMAw1M+fjwKCkT4Dj//woT9Nf76xo8BNUd+wLZA+MGBvvtIfb6RQLu+v0h/Rz+Qf3PBuv49Qff7gYS+wwM6Bkd4iYX8fSmGc8AAAAAAAAAAAAAAACwAAAAUka87D87MT82QicgBwAAAEmVDNfLH+sxBFo+/VEZ8vGtJM40+yHyQM4GDuDf0DPwGz0E++saPATVHfsC2QPjBgb77SH2+kUC7vXMLTsIBOkD6OcrL/QEsvPvGeDwGvv6/SH9HP5B/c8G6w=="
+            }],
+            "groups": [
+                "GROUP_ID_TEMP"
+            ]
+        }]
+    }
+}
