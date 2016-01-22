@@ -29,15 +29,17 @@ function readJson(file) {
 
 function identifyPerson() {
     localapiController.imageBufferUpload(firstPersonImg).then(function(res) {
-        var imgId = res;
+        var imgId = res.img_id;
         localapiController.faceDetect(imgId).then(function(res) {
-            var faces = res;
+            var faces = res.faces;
             var jsonStrFeature = null;
             if (faces.length > 0) {
                 var face = faces[0];
                 jsonStrFeature = face.featureData;
-                return localapiController.identify(groupId, null, jsonStrFeature).then(function(res) {
-                    console.log(res);
+                return localapiController.groupIdentify(groupId, null, jsonStrFeature).then(function(res) {
+                    console.log("-----------------------------------------------------------------");
+                    console.log("Test API importFeatureStr Success");
+                    // console.log(res);
                 });
             }
         });
@@ -49,7 +51,7 @@ function identifyPerson() {
 
 function importDatabase(featureStr, callback) {
     localapiController.importFeatureStr(featureStr).then(function(res) {
-        if (res) {
+        if (res.result) {
             callback({
                 result: true
             });
@@ -76,7 +78,3 @@ readJson('./featureDatabase.json').then(function(res) {
     console.log(error);
 });
 
-
-process.on('SIGINT', function() {
-    process.exit();
-});

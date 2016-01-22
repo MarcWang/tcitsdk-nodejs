@@ -10,9 +10,9 @@ var registPersonId = null;
 
 function registPerson(callback) {
     localapiController.imageBufferUpload(firstPersonImg).then(function(res) {
-        var imgId = res;
+        var imgId = res.img_id;
         return localapiController.faceDetect(imgId).then(function(res) {
-            var faces = res;
+            var faces = res.faces;
             var featureList = {
                 features: []
             }
@@ -49,9 +49,9 @@ function registPerson(callback) {
 
 function addFace() {
     localapiController.imageBufferUpload(secondPersonImg).then(function(res) {
-        var imgId = res;
+        var imgId = res.img_id;
         localapiController.faceDetect(imgId).then(function(res) {
-            var faces = res;
+            var faces = res.faces;
             var featureList = {
                 features: []
             }
@@ -64,7 +64,9 @@ function addFace() {
 
                 var jsonStrFeatureList = JSON.stringify(featureList);
                 return localapiController.addFaceToPerson(registPersonId, null, jsonStrFeatureList).then(function(res) {
-                    console.log(res);
+                    console.log("-----------------------------------------------------------------");
+                    console.log("Test API addFaceToPerson Success");
+                    // console.log(res);
                 });
             }
         });
@@ -75,13 +77,7 @@ function addFace() {
 
 
 registPerson(function(res) {
-    console.log(res);
     if (res.result) {
         addFace();
     }
 })
-
-
-process.on('SIGINT', function() {
-    process.exit();
-});

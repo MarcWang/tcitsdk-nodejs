@@ -35,15 +35,15 @@ var channels = [];
 var logInfo = [];
 
 localapiController.queryDeviceList().then(function(res) {
-    var devices = res;
+    var devices = res.devices;
     console.log(devices);
     var urls = [];
     devices.forEach(function(device) {
         urls.push(device.url);
     });
     localapiController.openMultiChannels(urls, params).then(function(res) {
-        console.log(res);
-        channels = res;
+        console.log(res.channel_ids);
+        channels = res.channel_ids;
     });
 }).catch(function(error) {
     console.log(error);
@@ -55,7 +55,7 @@ localapiController.queryDeviceList().then(function(res) {
 
         //query channel list
         localapiController.queryChannelList().then(function(res) {
-            var channelList = res;
+            var channelList = res.channels;
             channelList.forEach(function(channel){
                 logInfo.push({
                     id: channel.channel_id,
@@ -78,7 +78,7 @@ localapiController.queryDeviceList().then(function(res) {
         });
 
         trackLog();
-    }, 5000);
+    }, 10000);
 }());
 
 

@@ -26,10 +26,10 @@ function createGroup(callback) {
 
 
 function registPerson(callback) {
-    localapiController.imageBufferUpload(thirdPersonImg).then(function(res) {
-        var imgId = res;
+    localapiController.imageBufferUpload(secondPersonImg).then(function(res) {
+        var imgId = res.img_id;
         return localapiController.faceDetect(imgId).then(function(res) {
-            var faces = res;
+            var faces = res.faces;
             var featureList = {
                 features: []
             }
@@ -66,15 +66,18 @@ function registPerson(callback) {
 
 function identifyPerson() {
     localapiController.imageBufferUpload(secondPersonImg).then(function(res) {
-        var imgId = res;
+        var imgId = res.img_id;
         localapiController.faceDetect(imgId).then(function(res) {
-            var faces = res;
+            var faces = res.faces;
+
             var jsonStrFeature = null;
             if (faces.length > 0) {
                 var face = faces[0];
                 jsonStrFeature = face.featureData;
-                return localapiController.identify(groupId, null, jsonStrFeature).then(function(res) {
-                    console.log(res);
+                return localapiController.groupIdentify(groupId, null, jsonStrFeature).then(function(res) {
+                    console.log("-----------------------------------------------------------------");
+                    console.log("Test API groupIdentify Success");
+                    // console.log(res);
                 });
             }
         });
@@ -90,9 +93,4 @@ createGroup(function(res) {
             identifyPerson();
         }
     })
-});
-
-
-process.on('SIGINT', function() {
-    process.exit();
 });
