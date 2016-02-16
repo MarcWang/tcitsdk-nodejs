@@ -5,31 +5,31 @@ This repository provides NodeJS SDK for TCIT LocalAPI Service.
 
 ## NodeJS SDK Documentation
 
-- [API] getVersion
-- [API] setServerInfo
-- [API] imageBufferUpload
-- [API] imagePathUpload
-- [API] faceDetect
-- [API] createFaceTrack
-- [API] deleteFaceTrack
-- [API] faceCompare
-- [API] queryDeviceList
-- [API] listenWebSocketMsg
-- [API] openMultiChannels
-- [API] closeAllChannels
-- [API] openChannel
-- [API] closeChannel
-- [API] queryChannelList
-- [API] getChannelInfo
-- [API] createPerson
-- [API] deletePerson
-- [API] addFaceToPerson
-- [API] queryPersonList
-- [API] verify
-- [API] createGroup
-- [API] deleteGroup
-- [API] identify
-- [API] importFeatureStr
+### `[API] getVersion`
+### `[API] setServerInfo`
+### `[API] imageBufferUpload`
+### `[API] imagePathUpload`
+### `[API] faceDetect`
+### `[API] createFaceTrack`
+### `[API] deleteFaceTrack`
+### `[API] faceCompare`
+### `[API] queryDeviceList`
+### `[API] listenWebSocketMsg`
+### `[API] openMultiChannels`
+### `[API] closeAllChannels`
+### `[API] openChannel`
+### `[API] closeChannel`
+### `[API] queryChannelList`
+### `[API] getChannelInfo`
+### `[API] createPerson`
+### `[API] deletePerson`
+### `[API] addFaceToPerson`
+### `[API] queryPersonList`
+### `[API] verify`
+### `[API] createGroup`
+### `[API] deleteGroup`
+### `[API] identify`
+### `[API] importFeatureStr`
 
 ## LocalAPI Documentation
 
