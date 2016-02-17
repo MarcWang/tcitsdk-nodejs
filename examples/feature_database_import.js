@@ -39,7 +39,7 @@ function identifyPerson() {
                 return localapiController.groupIdentify(groupId, null, jsonStrFeature).then(function(res) {
                     console.log("-----------------------------------------------------------------");
                     console.log("Test API importFeatureStr Success");
-                    // console.log(res);
+                    console.log(res);
                 });
             }
         });

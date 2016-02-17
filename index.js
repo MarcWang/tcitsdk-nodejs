@@ -568,7 +568,7 @@ localapi.prototype.imagePersonVerify = function(buffer, personId) {
         }
 
         var data = {
-            person_id: person_id,
+            person_id: personId,
             image: {
                 buffer: buffer,
                 content_type: 'image/jpeg'
