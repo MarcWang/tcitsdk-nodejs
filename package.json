@@ -23,6 +23,8 @@
   "homepage": "https://github.com/MarcWang/tcitsdk-nodejs#readme",
   "dependencies": {
     "bluebird": "^3.1.1",
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
     "needle": "^0.11.0",
     "ws": "^1.0.1"
   }
