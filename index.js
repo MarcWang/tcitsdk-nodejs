@@ -52,7 +52,7 @@ var TIMEOUT_OPEN_CHANNEL = 10000;
 
 var localapi = function() {
     var self = this;
-    self.version = '1.0.3';
+    self.version = '1.0.4';
 
     self.server = {
         host: 'localhost',

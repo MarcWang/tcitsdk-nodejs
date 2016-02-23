@@ -1,7 +1,46 @@
+
+![logo](http://www.tcit-tw.com/wp-content/uploads/2014/07/tcit_logo.png)
+
 # TCIT LocalAPI NodeJS SDK
 This repository provides NodeJS SDK for TCIT LocalAPI Service.
 
 ## Introduction
+
+TCIT LocalAPI is computer vision local service, most features include face detection, facial recognition, age and gender estimation...
+
+
+## LocalAPI Documentation
+
+[LocalAPI_Doc](https://tcit.gitbooks.io/localapi/content/api_doc.html)
+
+## Architecture
+
+![logo](http://www.tcit-tw.com/wp-content/uploads/2014/07/tcit_logo.png)
+
+## Require Module
+- bluebird
+- needle
+- ws
+- mocha (optional for test)
+- chai (optional for test)
+- fluent-ffmpeg (optional for test)
+
+## Quick Start
+
+**npm install**
+```bat
+$ npm install tcitsdk-nodejs
+```
+
+**build from github**
+```bat
+$ git clone https://github.com/MarcWang/tcitsdk-nodejs.git
+$ npm install
+```
+
+## Platform Support
+- Window 
+- Linux 
 
 ## NodeJS SDK Documentation
 
@@ -127,34 +166,11 @@ localapiController.humanDetect(null, base64Img, null).then(function(res) {
 ### `[API] importFeatureStr(importStr)`
 ### `[API] importFeatureFile(importFile)`
 
-
-## LocalAPI Documentation
-
-[LocalAPI_Doc](https://tcit.gitbooks.io/localapi/content/api_doc.html)
-
-## Architecture
-
-## Require Module
-- bluebird
-- needle
-- ws
-- mocha (optional for test)
-- chai (optional for test)
-- fluent-ffmpeg (optional for test)
-
-
-## How to install
-
-**npm install**
-```bat
-$ npm install tcitsdk-nodejs
-```
-
-**build from github**
-```bat
-$ git clone https://github.com/MarcWang/tcitsdk-nodejs.git
-$ npm install
-```
-
 ## Example
 
+## Authors
+Originally created by Marc Wang
+
+## LICENSE
+
+tcitsdk-nodejs is licensed under the Apache-2.0. For more information, see the LICENSE file in this repository.
