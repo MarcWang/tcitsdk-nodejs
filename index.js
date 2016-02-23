@@ -144,14 +144,20 @@ localapi.prototype.imageBufferUpload = function(buffer) {
 /* [API] Storage Upload
  * [Function Input]
  * @param {string} path
- * [Promise Return]
+ * [Promise Resolve]
  * @object {string} img_id
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.imagePathUpload = function(path) {
     var self = this;
     return new Promise(function(resolve, reject) {
         if (typeof(path) != 'string') {
-            reject('NodeJS SDK Error');
+            reject({
+                localapi: null,
+                nodejs: "input is not string"
+            });
         }
 
         var data = {
@@ -171,7 +177,10 @@ localapi.prototype.imagePathUpload = function(path) {
                     img_id: body.img_id
                 });
             } else {
-                reject('TCIT LocalAPI Response');
+                reject({
+                    localapi: body.state,
+                    nodejs: null
+                });
             }
         });
     });

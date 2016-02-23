@@ -65,13 +65,17 @@ localapiController.setServerInfo('localhost', "8800", "4662");
 
 ### `[API] imageBufferUpload(buffer)`
 
- ** [Function Input]
- @param {object} buffer
- ** [Promise Resolve]
- @object {string} img_id
- ** [Promise Reject]
- @object {string} localapi
- @object {string} nodejs
+Upload image to TCIT LocalAPI Service using buffer
+
+ **[Function Input]**
+ - @param {object} buffer
+ 
+ **[Promise Resolve]**
+ - @object {string} img_id
+ 
+ **[Promise Reject]**
+ - @object {string} localapi
+ - @object {string} nodejs
 
 ```javascript
 var fs = require("fs");
@@ -87,6 +91,18 @@ localapiController.imageBufferUpload(buffer).then(function(res) {
 ```
 
 ### `[API] imagePathUpload(path)`
+
+Upload image to TCIT LocalAPI Service using file path
+
+ **[Function Input]**
+ - @param {string} path
+ 
+ **[Promise Resolve]**
+ - @object {string} img_id
+ 
+ **[Promise Reject]**
+ - @object {string} localapi
+ - @object {string} nodejs
 
 ```javascript
 var fs = require("fs");
