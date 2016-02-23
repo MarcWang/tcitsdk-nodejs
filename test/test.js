@@ -3,7 +3,7 @@ var assert = require('chai').assert;
 var fs = require("fs");
 
 describe('Test API of TCIT LocalAPI SDK', function() {
-    var TCITLocalApi = require('./index.js');
+    var TCITLocalApi = require('../index.js');
     var buffer = null;
     it('load', function() {
 
@@ -11,7 +11,7 @@ describe('Test API of TCIT LocalAPI SDK', function() {
 
     before(function() {
         // 任何需要在測試前執行的程式
-        buffer = fs.readFileSync('./image/lena.jpg');
+        buffer = fs.readFileSync('../image/lena.jpg');
     });
     after(function() {
         // 任何需要在測試後刪除的資料
