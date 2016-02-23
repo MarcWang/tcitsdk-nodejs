@@ -1,13 +1,12 @@
 
-![logo](http://www.tcit-tw.com/wp-content/uploads/2014/07/tcit_logo.png)
+![logo](https://github.com/MarcWang/tcitsdk-nodejs/blob/master/tcit_logo.png)
 
 # TCIT LocalAPI NodeJS SDK
-This repository provides NodeJS SDK for TCIT LocalAPI Service.
+This repository provides NodeJS SDK for how to connect TCIT LocalAPI Service.
 
 ## Introduction
 
 TCIT LocalAPI is computer vision local service, most features include face detection, facial recognition, age and gender estimation...
-
 
 ## LocalAPI Documentation
 
@@ -15,7 +14,7 @@ TCIT LocalAPI is computer vision local service, most features include face detec
 
 ## Architecture
 
-![logo](http://www.tcit-tw.com/wp-content/uploads/2014/07/tcit_logo.png)
+![architecture](https://github.com/MarcWang/tcitsdk-nodejs/blob/master/architecture.png)
 
 ## Require Module
 - bluebird
@@ -46,6 +45,8 @@ $ npm install
 
 ### `[API] getVersion()`
 
+Get SDK version
+
 ```javascript
 var TCITLocalApi = require('tcitsdk-nodejs');
 var localapiController = new TCITLocalApi();
@@ -54,6 +55,8 @@ var v = localapiController.getVersion();
 
 ### `[API] setServerInfo(host, port, wsPort)`
 
+Set information of TCIT LocalAPI service
+
 ```javascript
 var TCITLocalApi = require('tcitsdk-nodejs');
 var localapiController = new TCITLocalApi();
@@ -61,6 +64,14 @@ localapiController.setServerInfo('localhost', "8800", "4662");
 ```
 
 ### `[API] imageBufferUpload(buffer)`
+
+ ** [Function Input]
+ @param {object} buffer
+ ** [Promise Resolve]
+ @object {string} img_id
+ ** [Promise Reject]
+ @object {string} localapi
+ @object {string} nodejs
 
 ```javascript
 var fs = require("fs");

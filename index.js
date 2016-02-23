@@ -99,14 +99,20 @@ localapi.prototype.setServerInfo = function(host, port, wsPort) {
 /* [API] Storage Upload
  * [Function Input]
  * @param {object} buffer
- * [Promise Return]
+ * [Promise Resolve]
  * @object {string} img_id
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.imageBufferUpload = function(buffer) {
     var self = this;
     return new Promise(function(resolve, reject) {
         if (typeof(buffer) != 'object') {
-            reject('NodeJS SDK Error');
+            reject({
+                localapi: null,
+                nodejs: "input is not buffer"
+            });
         }
 
         var postData = {
@@ -126,7 +132,10 @@ localapi.prototype.imageBufferUpload = function(buffer) {
                     img_id: body.img_id
                 });
             } else {
-                reject('TCIT LocalAPI Response');
+                reject({
+                    localapi: body.state,
+                    nodejs: null
+                });
             }
         });
     });
@@ -601,7 +610,7 @@ localapi.prototype.imagePersonVerify = function(buffer, personId) {
 localapi.prototype.createGroup = function(personId) {
     var self = this;
     return new Promise(function(resolve, reject) {
-        if( personId != null && typeof(personId) != 'undefined'){
+        if (personId != null && typeof(personId) != 'undefined') {
             if (typeof(personId) != 'string') {
                 reject('NodeJS SDK Error');
             }

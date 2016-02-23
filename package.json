@@ -1,29 +1,33 @@
 {
-  "name": "tcitsdk-nodejs",
-  "version": "1.0.4",
-  "description": "NodeJS SDK for TCIT LocalAPI Service",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MarcWang/tcitsdk-nodejs.git"
-  },
-  "keywords": [
-    "nodejs",
-    "sdk",
-    "tcit"
-  ],
-  "author": "Marc",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/MarcWang/tcitsdk-nodejs/issues"
-  },
-  "homepage": "https://github.com/MarcWang/tcitsdk-nodejs#readme",
-  "dependencies": {
-    "bluebird": "^3.1.1",
-    "needle": "^0.11.0",
-    "ws": "^1.0.1"
-  }
+    "name": "tcitsdk-nodejs",
+    "version": "1.0.4",
+    "description": "NodeJS SDK for TCIT LocalAPI Service",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MarcWang/tcitsdk-nodejs.git"
+    },
+    "keywords": [
+        "nodejs",
+        "sdk",
+        "tcit"
+    ],
+    "author": {
+        "name":"Marc",
+        "email":"s4161035@gmail.com",
+        "url":"www.marcwang.taipei"   
+    },
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/MarcWang/tcitsdk-nodejs/issues"
+    },
+    "homepage": "https://github.com/MarcWang/tcitsdk-nodejs#readme",
+    "dependencies": {
+        "bluebird": "^3.1.1",
+        "needle": "^0.11.0",
+        "ws": "^1.0.1"
+    }
 }
