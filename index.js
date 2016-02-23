@@ -47,6 +47,8 @@ var TCIT_STATE_SUCCESSFUL = 1000,
     TCIT_STATE_PARAMETER_ERROR = 3002,
     TCIT_STATE_PROCESS_ERROR = 3003;
 
+var NODEJS_STATE_TYPE_ERROR = 5001;
+
 var TIMEDELAY_OPEN_CHANNEL = 500; //500ms
 var TIMEOUT_OPEN_CHANNEL = 10000;
 
@@ -111,7 +113,7 @@ localapi.prototype.imageBufferUpload = function(buffer) {
         if (typeof(buffer) != 'object') {
             reject({
                 localapi: null,
-                nodejs: "input is not buffer"
+                nodejs: NODEJS_STATE_TYPE_ERROR
             });
         }
 
@@ -156,7 +158,7 @@ localapi.prototype.imagePathUpload = function(path) {
         if (typeof(path) != 'string') {
             reject({
                 localapi: null,
-                nodejs: "input is not string"
+                nodejs: NODEJS_STATE_TYPE_ERROR
             });
         }
 
@@ -191,14 +193,20 @@ localapi.prototype.imagePathUpload = function(path) {
  * @param {string} imgId
  * @param {string} img (Base64 String)
  * @param {string} trackId
- * [Promise Return]
+ * [Promise Resolve]
  * @object {object} faces
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.faceDetect = function(imgId, img, trackId) {
     var self = this;
     return new Promise(function(resolve, reject) {
         if (typeof(imgId) != 'string' && typeof(img) != 'string') {
-            reject('NodeJS SDK Error');
+            reject({
+                localapi: null,
+                nodejs: NODEJS_STATE_TYPE_ERROR
+            });
         }
 
         var data = {
@@ -216,7 +224,10 @@ localapi.prototype.faceDetect = function(imgId, img, trackId) {
                         faces: body.faces
                     });
                 } else {
-                    reject('TCIT LocalAPI Response');
+                    reject({
+                        localapi: body.state,
+                        nodejs: null
+                    });
                 }
             });
     });
@@ -224,8 +235,11 @@ localapi.prototype.faceDetect = function(imgId, img, trackId) {
 
 /* [API] Create Face Tracked Detection
  * [Function Input]
- * [Promise Return]
+ * [Promise Resolve]
  * @object {string} track_id
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.createFaceTrack = function() {
     var self = this;
@@ -239,7 +253,10 @@ localapi.prototype.createFaceTrack = function() {
                         treck_id: body.track_id
                     });
                 } else {
-                    reject('TCIT LocalAPI Response');
+                    reject({
+                        localapi: body.state,
+                        nodejs: null
+                    });
                 }
             });
     });
@@ -255,7 +272,10 @@ localapi.prototype.deleteFaceTrack = function(trackId) {
     var self = this;
     return new Promise(function(resolve, reject) {
         if (typeof(trackId) != 'string') {
-            reject('NodeJS SDK Error');
+            reject({
+                localapi: null,
+                nodejs: NODEJS_STATE_TYPE_ERROR
+            });
         }
         var data = {
             track_id: trackId
@@ -269,7 +289,10 @@ localapi.prototype.deleteFaceTrack = function(trackId) {
                         result: true
                     });
                 } else {
-                    reject('TCIT LocalAPI Response');
+                    reject({
+                        localapi: body.state,
+                        nodejs: null
+                    });
                 }
             });
     });

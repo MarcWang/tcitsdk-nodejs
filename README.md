@@ -87,9 +87,9 @@ var localapiController = new TCITLocalApi();
 
 var buffer = fs.readFileSync('./image/lena.jpg');
 localapiController.imageBufferUpload(buffer).then(function(res) {
-    console.log("Test API imageBufferUpload Success");
+    console.log("Call API Success");
 }).catch(function(error) {
-    console.log("Test API imageBufferUpload Error");
+    console.log("Call API Error");
 });
 ```
 
@@ -116,13 +116,30 @@ var TCITLocalApi = require('tcitsdk-nodejs');
 var localapiController = new TCITLocalApi();
 
 localapiController.imagePathUpload('./image/lena.jpg').then(function(res) {
-    console.log("Test API imagePathUpload Success");
+    console.log("Call API Success");
 }).catch(function(error) {
-    console.log("Test API imagePathUpload Error");
+    console.log("Call API Error");
 });
 ```
 
 ### `[API] faceDetect(imgId, img, trackId)`
+
+Call Face Detection API on TCIT LocalAPI Service
+
+**[Function Input]**
+ 
+- @param {string} imgId
+- @param {string} img (Base64 String)
+- @param {string} trackId
+ 
+**[Promise Resolve]**
+ 
+- @object {object} faces
+ 
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
 
 ```javascript
 var fs = require("fs");
@@ -133,23 +150,59 @@ var bufferImg = fs.readFileSync('./image/lena.jpg');
 localapiController.imageBufferUpload(bufferImg).then(function(res) {
     var imgId = res.img_id;
     localapiController.faceDetect(imgId, null, null).then(function(res) {
-        console.log("Test API faceDetect using img_id Success");
+        console.log("Call API Success");
     });
 }).catch(function(error) {
-    console.log("Test API faceDetect using img_id Error");
+    console.log("Call API Error");
 });
 
 
 var base64Img = bufferImg.toString('base64');
 localapiController.faceDetect(null, base64Img, null).then(function(res) {
-    console.log("Test API faceDetect using base64Img Success");
+    console.log("Call API Success");
 }).catch(function(error) {
-    console.log("Test API faceDetect using base64Img Error");
+    console.log("Call API Error");
 });
 ```
 
 ### `[API] createFaceTrack()`
+
+```javascript
+var TCITLocalApi = require('tcitsdk-nodejs');
+var localapiController = new TCITLocalApi();
+
+localapiController.createFaceTrack().then(function(res) {
+    console.log("Call API Success");
+}).catch(function(error) {
+    console.log("Call API Error");
+});
+```
+
 ### `[API] deleteFaceTrack(trackId)`
+
+```javascript
+var TCITLocalApi = require('tcitsdk-nodejs');
+var localapiController = new TCITLocalApi();
+
+var trackId = null;
+localapiController.createFaceTrack().then(function(res) {
+    console.log("Call API Success");
+    trackId = res.track_id;
+}).catch(function(error) {
+    console.log("Call API Error");
+});
+
+/*
+Face Detection...
+ */
+
+localapiController.deleteFaceTrack(trackId).then(function(res) {
+    console.log("Call API Success");
+}).catch(function(error) {
+    console.log("Call API Error");
+});
+```
+
 ### `[API] faceCompare(faceId1, faceId2)`
 ### `[API] createPerson(faceId, jsonStrFeatureList, groupId)`
 ### `[API] deletePerson(personId)`

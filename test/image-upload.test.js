@@ -35,6 +35,15 @@ describe('Test API of TCIT LocalAPI SDK', function() {
                 assert.fail(err);
             });
         });
+
+        it('should be return error when no input value ', function() {
+            var result = localapiController.imageBufferUpload();
+            return result.then(function(res) {
+                assert.fail();
+            }, function(err) {
+                expect(err).to.have.a.property('nodejs');
+            });
+        });   
     });
 
     describe('API.imagePathUpload', function() {
@@ -55,6 +64,15 @@ describe('Test API of TCIT LocalAPI SDK', function() {
                 expect(res.img_id).to.have.a('string');
             }, function(err) {
                 assert.fail(err);
+            });
+        });
+
+        it('should be return error when no input value ', function() {
+            var result = localapiController.imagePathUpload();
+            return result.then(function(res) {
+                assert.fail();
+            }, function(err) {
+                expect(err).to.have.a.property('nodejs');
             });
         });
     });
