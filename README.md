@@ -50,6 +50,7 @@ Get SDK version
 ```javascript
 var TCITLocalApi = require('tcitsdk-nodejs');
 var localapiController = new TCITLocalApi();
+
 var v = localapiController.getVersion();
 ```
 
@@ -60,6 +61,7 @@ Set information of TCIT LocalAPI service
 ```javascript
 var TCITLocalApi = require('tcitsdk-nodejs');
 var localapiController = new TCITLocalApi();
+
 localapiController.setServerInfo('localhost', "8800", "4662");
 ```
 
@@ -81,9 +83,6 @@ Upload image to TCIT LocalAPI Service using buffer
 - @object {string} nodejs
 
 ```javascript
-var fs = require("fs");
-var TCITLocalApi = require('tcitsdk-nodejs');
-var localapiController = new TCITLocalApi();
 
 var buffer = fs.readFileSync('./image/lena.jpg');
 localapiController.imageBufferUpload(buffer).then(function(res) {
@@ -111,9 +110,6 @@ Upload image to TCIT LocalAPI Service using file path
 - @object {string} nodejs
 
 ```javascript
-var fs = require("fs");
-var TCITLocalApi = require('tcitsdk-nodejs');
-var localapiController = new TCITLocalApi();
 
 localapiController.imagePathUpload('./image/lena.jpg').then(function(res) {
     console.log("Call API Success");
@@ -142,9 +138,6 @@ Call Face Detection API on TCIT LocalAPI Service
 - @object {string} nodejs
 
 ```javascript
-var fs = require("fs");
-var TCITLocalApi = require('tcitsdk-nodejs');
-var localapiController = new TCITLocalApi();
 
 var bufferImg = fs.readFileSync('./image/lena.jpg');
 localapiController.imageBufferUpload(bufferImg).then(function(res) {
@@ -167,9 +160,18 @@ localapiController.faceDetect(null, base64Img, null).then(function(res) {
 
 ### `[API] createFaceTrack()`
 
+**[Function Input]**
+ 
+**[Promise Resolve]**
+ 
+- @object {string} track_id
+ 
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ```javascript
-var TCITLocalApi = require('tcitsdk-nodejs');
-var localapiController = new TCITLocalApi();
 
 localapiController.createFaceTrack().then(function(res) {
     console.log("Call API Success");
@@ -180,9 +182,20 @@ localapiController.createFaceTrack().then(function(res) {
 
 ### `[API] deleteFaceTrack(trackId)`
 
+**[Function Input]**
+ 
+- @param {string} trackId
+ 
+**[Promise Resolve]**
+ 
+- @object {boolean} result
+ 
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ```javascript
-var TCITLocalApi = require('tcitsdk-nodejs');
-var localapiController = new TCITLocalApi();
 
 var trackId = null;
 localapiController.createFaceTrack().then(function(res) {
@@ -204,17 +217,226 @@ localapiController.deleteFaceTrack(trackId).then(function(res) {
 ```
 
 ### `[API] faceCompare(faceId1, faceId2)`
+
+**[Function Input]**
+ 
+- @param {string} faceId1
+- @param {string} faceId2
+
+**[Promise Resolve]**
+ 
+- @object {number} similarity
+ 
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
+```javascript
+var faceId1 = null;
+var faceId2 = null;
+/*
+Upload Image and Face Detection...
+ */
+
+localapiController.faceCompare(faceId1, faceId2).then(function(res) {
+    console.log("Call API Success");
+}).catch(function(error) {
+    console.log("Call API Error");
+});
+```
+
 ### `[API] createPerson(faceId, jsonStrFeatureList, groupId)`
+
+**[Function Input]**
+ 
+- @param {string} faceId
+- @param {string} jsonStrFeatureList
+- @param {string} groupId
+
+**[Promise Resolve]**
+ 
+- @object {string} person_id
+- @object {number} added_face_count
+- @object {number} added_group_count
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
+```javascript
+
+var faceId = null;
+/*
+Upload Image and Face Detection...
+ */
+
+localapiController.createPerson(faceId, null, null).then(function(res) {
+    console.log("Call API Success");
+}).catch(function(error) {
+    console.log("Call API Error");
+});
+```
+
 ### `[API] deletePerson(personId)`
+
+**[Function Input]**
+ 
+- @param {string} personId
+
+**[Promise Resolve]**
+ 
+- @object {number} delete_count
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] addFaceToPerson(personId, faceId, jsonStrFeatureList)`
+
+**[Function Input]**
+ 
+- @param {string} personId
+- @param {string} faceId
+- @param {string} jsonStrFeatureList
+
+**[Promise Resolve]**
+ 
+- @object {number} added_face_count
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] removeFaceFromPerson(personId, faceId)`
+
+**[Function Input]**
+ 
+- @param {string} personId
+- @param {string} faceId
+
+**[Promise Resolve]**
+ 
+- @object {number} removed_face_count
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] getPersonInfo(personId)`
+
+**[Function Input]**
+ 
+- @param {string} personId
+
+**[Promise Resolve]**
+ 
+- @object {string} person_id
+- @object {object} faces
+- @object {object} groups
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] queryPersonList()`
+
+**[Function Input]**
+ 
+**[Promise Resolve]**
+ 
+- @object {object} persons
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] personVerify(personId, faceId, jsonStrFeature)`
-### `[API] imagePersonVerify(buffer, personId)`
+
+**[Function Input]**
+ 
+- @param {string} personId
+- @param {string} faceId
+- @param {string} jsonStrFeature
+
+**[Promise Resolve]**
+ 
+- @object {number} confidence
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
+### `[API] imagePersonVerify(imgBuffer, personId)`
+
+**[Function Input]**
+ 
+- @param {object} imgBuffer
+- @param {string} personId
+
+**[Promise Resolve]**
+ 
+- @object {object} faces
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] createGroup(personId)`
+
+**[Function Input]**
+ 
+- @param {string} personId
+
+**[Promise Resolve]**
+ 
+- @object {string} group_id
+- @object {number} added_person_count
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] deleteGroup(groupId)`
+
+**[Function Input]**
+ 
+- @param {string} groupId
+
+**[Promise Resolve]**
+ 
+- @object {number} delete_count
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] addPersonToGroup(groupId, personId)`
+
+**[Function Input]**
+ 
+- @param {string} groupId
+- @param {string} personId
+
+**[Promise Resolve]**
+ 
+- @object {number} added_person_count
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] removePersonFromGroup(groupId, personId)`
 ### `[API] getGroupInfo(groupId)`
 ### `[API] queryGroupList()`
