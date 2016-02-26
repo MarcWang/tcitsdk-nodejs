@@ -1,0 +1,7 @@
+before_install:
+  - npm install tcitsdk-nodejs
+  - npm install mocha -g
+  - npm install chai -g
+language: node_js
+node_js:
+  - "0.12"
