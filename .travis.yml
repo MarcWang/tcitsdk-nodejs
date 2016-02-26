@@ -1,6 +1,4 @@
 before_install:
-  - npm install mocha -g
-  - npm install chai -g
 language: node_js
 node_js:
   - "4.3.0"
