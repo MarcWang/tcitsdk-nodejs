@@ -2,7 +2,7 @@ var fs = require("fs"),
     gm = require('gm');
 var TCITLocalApi = require('./../index.js');
 var localapiController = new TCITLocalApi();
-var srcDir = './image/one/';
+var srcDir = './image/pos/';
 var dstDir = './tmp/'
 
 mkdirSync(dstDir);

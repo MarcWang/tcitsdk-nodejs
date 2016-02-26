@@ -2,22 +2,35 @@ var expect = require('chai').expect;
 var assert = require('chai').assert;
 var fs = require("fs");
 
-describe('Test API of TCIT LocalAPI SDK', function() {
-    var TCITLocalApi = require('../index.js');
+function readFile(file) {
+    var data = fs.readFileSync(file);
+    try {
+        var obj = JSON.parse(data);
+        return obj;
+    } catch (err) {
+        return null;
+    }
+}
+
+describe('Test Image Upload API of TCIT LocalAPI SDK', function() {
+    var TCITLocalApi = require(__dirname + '/../../index.js');
+    var localapiController = null;
     var buffer = null;
-    var path = '../image/lena.jpg'
-    it('load', function() {
-    });
+    var path = null;
+    // it('load', function() {});
 
     before(function() {
-        buffer = fs.readFileSync('../image/lena.jpg');
+        buffer = fs.readFileSync(__dirname + '/../../image/lena.jpg');
+        path = __dirname + '/../../image/lena.jpg';
+        var cfgSetting = readFile(__dirname + '/config.json');
+        var host = cfgSetting.server.host;
+        var port = parseInt(cfgSetting.server.port, 10);
+        localapiController = new TCITLocalApi();
+        localapiController.setServerInfo(host, port, 4662);
     });
-    after(function() {
-    });
+    after(function() {});
 
     describe('API.imageBufferUpload', function() {
-        var localapiController = new TCITLocalApi();
-
         it('should be return img_id when input buffer of image', function() {
             var result = localapiController.imageBufferUpload(buffer);
             return result.then(function(res) {
@@ -43,7 +56,7 @@ describe('Test API of TCIT LocalAPI SDK', function() {
             }, function(err) {
                 expect(err).to.have.a.property('nodejs');
             });
-        });   
+        });
     });
 
     describe('API.imagePathUpload', function() {

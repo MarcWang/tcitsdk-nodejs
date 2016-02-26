@@ -2,17 +2,31 @@ var expect = require('chai').expect;
 var assert = require('chai').assert;
 var fs = require("fs");
 
-describe('Test API of TCIT LocalAPI SDK', function() {
-    var TCITLocalApi = require('../index.js');
-    var localapiController = new TCITLocalApi();
-    var buffer = null;
+function readFile(file) {
+    var data = fs.readFileSync(file);
+    try {
+        var obj = JSON.parse(data);
+        return obj;
+    } catch (err) {
+        return null;
+    }
+}
+
+describe('Test Face Detection API of TCIT LocalAPI SDK', function() {
+    var TCITLocalApi = require(__dirname + '/../../index.js');
+    var localapiController = null;
     var imgId = null;
     var base64Img = null;
-    var path = '../image/lena.jpg'
-    it('load', function() {});
+    // it('load', function() {});
 
     before(function() {
-        buffer = fs.readFileSync('../image/lena.jpg');
+        var buffer = fs.readFileSync(__dirname + '/../../image/lena.jpg');
+        var cfgSetting = readFile(__dirname + '/config.json');
+        var host = cfgSetting.server.host;
+        var port = parseInt(cfgSetting.server.port, 10);
+        localapiController = new TCITLocalApi();
+        localapiController.setServerInfo(host, port, 4662);
+
         base64Img = buffer.toString('base64');
         var result = localapiController.imageBufferUpload(buffer);
         return result.then(function(res) {
@@ -25,7 +39,7 @@ describe('Test API of TCIT LocalAPI SDK', function() {
 
     describe('API.faceDetect on non-tracking', function() {
         it('should be return faces when input img_id', function() {
-            var result = localapiController.faceDetect(imgId,null,null);
+            var result = localapiController.faceDetect(imgId, null, null);
             return result.then(function(res) {
                 expect(res).to.have.a.property('faces');
             }, function(err) {
@@ -34,7 +48,7 @@ describe('Test API of TCIT LocalAPI SDK', function() {
         });
 
         it('should be return faces when input base64 of image', function() {
-            var result = localapiController.faceDetect(null,base64Img,null);
+            var result = localapiController.faceDetect(null, base64Img, null);
             return result.then(function(res) {
                 expect(res).to.have.a.property('faces');
             }, function(err) {
@@ -65,7 +79,7 @@ describe('Test API of TCIT LocalAPI SDK', function() {
         });
 
         it('should be return faces when input base64 of image on tracking mode', function() {
-            var result = localapiController.faceDetect(null,base64Img,trackId);
+            var result = localapiController.faceDetect(null, base64Img, trackId);
             return result.then(function(res) {
                 expect(res).to.have.a.property('faces');
             }, function(err) {

@@ -2,22 +2,36 @@ var expect = require('chai').expect;
 var assert = require('chai').assert;
 var fs = require("fs");
 
-describe('Test Face Compare of TCIT LocalAPI SDK', function() {
-    var TCITLocalApi = require('../index.js');
-    var localapiController = new TCITLocalApi();
-    var base64Img1 = null;
-    var base64Img2 = null;
+function readFile(file) {
+    var data = fs.readFileSync(file);
+    try {
+        var obj = JSON.parse(data);
+        return obj;
+    } catch (err) {
+        return null;
+    }
+}
+
+describe('Test Person Control of TCIT LocalAPI SDK', function() {
+    var TCITLocalApi = require(__dirname + '/../../index.js');
+    var localapiController = null;
     var faceId1 = null;
     var faceId2 = null;
     var personId = null;
 
-    it('load', function() {});
+    // it('load', function() {});
 
     before(function() {
-        var buffer1 = fs.readFileSync('../image/lena.jpg');
-        var buffer2 = fs.readFileSync('../image/ann.jpg');
-        base64Img1 = buffer1.toString('base64');
-        base64Img2 = buffer2.toString('base64');
+        var cfgSetting = readFile(__dirname + '/config.json');
+        var host = cfgSetting.server.host;
+        var port = parseInt(cfgSetting.server.port, 10);
+        localapiController = new TCITLocalApi();
+        localapiController.setServerInfo(host, port, 4662);
+
+        var buffer1 = fs.readFileSync(__dirname + '/../../image/lena.jpg');
+        var buffer2 = fs.readFileSync(__dirname + '/../../image/ann.jpg');
+        var base64Img1 = buffer1.toString('base64');
+        var base64Img2 = buffer2.toString('base64');
 
         var result = localapiController.faceDetect(null, base64Img1, null);
         return result.then(function(res) {
