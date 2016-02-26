@@ -1,6 +1,6 @@
 {
   "name": "tcitsdk-nodejs",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "NodeJS SDK for TCIT LocalAPI Service",
   "main": "index.js",
   "scripts": {

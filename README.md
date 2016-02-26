@@ -440,10 +440,83 @@ localapiController.createPerson(faceId, null, null).then(function(res) {
 - @object {string} nodejs
 
 ### `[API] removePersonFromGroup(groupId, personId)`
+
+**[Function Input]**
+ 
+- @param {string} groupId
+- @param {string} personId
+
+**[Promise Resolve]**
+ 
+- @object {number} removed_person_count
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] getGroupInfo(groupId)`
+
+**[Function Input]**
+ 
+- @param {string} groupId
+
+**[Promise Resolve]**
+ 
+- @object {string} group_id
+- @object {object} persons
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] queryGroupList()`
+
+**[Function Input]**
+
+**[Promise Resolve]**
+
+- @object {object} groups
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] groupIdentify(groupId, faceId, featureData)`
+
+**[Function Input]**
+ 
+- @param {string} groupId
+- @param {string} faceId
+- @param {string} featureData
+
+**[Promise Resolve]**
+ 
+- @object {object} persons
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] humanDetect(imgId, img, trackId)`
+
+**[Function Input]**
+ 
+- @param {string} imgId
+- @param {string} img (Base64 String)
+- @param {string} trackId
+
+**[Promise Resolve]**
+ 
+- @object {object} humans
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
 
 ```javascript
 
@@ -462,6 +535,18 @@ localapiController.humanDetect(null, base64Img, null).then(function(res) {
 ```
 
 ### `[API] createHumanTrack()`
+
+**[Function Input]**
+
+**[Promise Resolve]**
+ 
+- @object {string} track_id
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] deleteHumanTrack(trackId)`
 ### `[API] openChannel(url, channelParam)`
 ### `[API] openMultiChannels(urls, channelParam)`

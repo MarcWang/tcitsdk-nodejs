@@ -858,15 +858,21 @@ localapi.prototype.addPersonToGroup = function(groupId, personId) {
  * [Function Input]
  * @param {string} groupId
  * @param {string} personId
- * [Promise Return]
+ * [Promise Resolve]
  * @object {number} removed_person_count
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.removePersonFromGroup = function(groupId, personId) {
     var self = this;
     return new Promise(function(resolve, reject) {
 
         if (typeof(groupId) != 'string' || typeof(personId) != 'string') {
-            reject('NodeJS SDK Error');
+            reject({
+                localapi: null,
+                nodejs: NODEJS_STATE_TYPE_ERROR
+            });
         }
 
         var data = {
@@ -883,7 +889,10 @@ localapi.prototype.removePersonFromGroup = function(groupId, personId) {
                         removed_person_count: body.removed_person_count
                     });
                 } else {
-                    reject('TCIT LocalAPI Response');
+                    reject({
+                        localapi: body.state,
+                        nodejs: null
+                    });
                 }
             });
     });
@@ -892,16 +901,22 @@ localapi.prototype.removePersonFromGroup = function(groupId, personId) {
 /* [API] Get Group Information
  * [Function Input]
  * @param {string} groupId
- * [Promise Return]
+ * [Promise Resolve]
  * @object {string} group_id
  * @object {object} persons
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.getGroupInfo = function(groupId) {
     var self = this;
     return new Promise(function(resolve, reject) {
 
         if (typeof(groupId) != 'string') {
-            reject('NodeJS SDK Error');
+            reject({
+                localapi: null,
+                nodejs: NODEJS_STATE_TYPE_ERROR
+            });
         }
 
         var data = {
@@ -918,7 +933,10 @@ localapi.prototype.getGroupInfo = function(groupId) {
                         group_id: body.group_id
                     });
                 } else {
-                    reject('TCIT LocalAPI Response');
+                    reject({
+                        localapi: body.state,
+                        nodejs: null
+                    });
                 }
             });
     });
@@ -926,8 +944,11 @@ localapi.prototype.getGroupInfo = function(groupId) {
 
 /* [API] Query Group List
  * [Function Input]
- * [Promise Return]
+ * [Promise Resolve]
  * @object {object} groups
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.queryGroupList = function() {
     var self = this;
@@ -942,7 +963,10 @@ localapi.prototype.queryGroupList = function() {
                         groups: body.groups
                     });
                 } else {
-                    reject('TCIT LocalAPI Response');
+                    reject({
+                        localapi: body.state,
+                        nodejs: null
+                    });
                 }
             });
     });
@@ -954,19 +978,28 @@ localapi.prototype.queryGroupList = function() {
  * @param {string} groupId
  * @param {string} faceId
  * @param {string} featureData
- * [Promise Return]
+ * [Promise Resolve]
  * @object {object} persons
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.groupIdentify = function(groupId, faceId, featureData) {
     var self = this;
     return new Promise(function(resolve, reject) {
 
         if (typeof(groupId) != 'string') {
-            reject('NodeJS SDK Error');
+            reject({
+                localapi: null,
+                nodejs: NODEJS_STATE_TYPE_ERROR
+            });
         }
 
         if (typeof(faceId) != 'string' && typeof(featureData) != 'string') {
-            reject('NodeJS SDK Error');
+            reject({
+                localapi: null,
+                nodejs: NODEJS_STATE_TYPE_ERROR
+            });
         }
 
         var data = {
@@ -984,7 +1017,10 @@ localapi.prototype.groupIdentify = function(groupId, faceId, featureData) {
                         persons: body.persons
                     });
                 } else {
-                    reject('TCIT LocalAPI Response');
+                    reject({
+                        localapi: body.state,
+                        nodejs: null
+                    });
                 }
             });
     });
@@ -995,14 +1031,20 @@ localapi.prototype.groupIdentify = function(groupId, faceId, featureData) {
  * @param {string} imgId
  * @param {string} img (Base64 String)
  * @param {string} trackId
- * [Promise Return]
+ * [Promise Resolve]
  * @object {object} humans
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.humanDetect = function(imgId, img, trackId) {
     var self = this;
     return new Promise(function(resolve, reject) {
         if (typeof(imgId) != 'string' && typeof(img) != 'string') {
-            reject('NodeJS SDK Error');
+            reject({
+                localapi: null,
+                nodejs: NODEJS_STATE_TYPE_ERROR
+            });
         }
 
         var data = {
@@ -1031,8 +1073,11 @@ localapi.prototype.humanDetect = function(imgId, img, trackId) {
 
 /* [API] Create Human Tracked Detection
  * [Function Input]
- * [Promise Return]
+ * [Promise Resolve]
  * @object {string} track_id
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.createHumanTrack = function() {
     var self = this;
@@ -1046,7 +1091,10 @@ localapi.prototype.createHumanTrack = function() {
                         treck_id: body.track_id
                     });
                 } else {
-                    reject('TCIT LocalAPI Response');
+                    reject({
+                        localapi: body.state,
+                        nodejs: null
+                    });
                 }
             });
     });
