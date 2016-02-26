@@ -4,7 +4,8 @@
   "description": "NodeJS SDK for TCIT LocalAPI Service",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/mocha/*.js"
+    "test": "mocha test/mocha/*.js",
+    "coveralls": ""
   },
   "repository": {
     "type": "git",
@@ -29,7 +30,9 @@
     "bluebird": "^3.1.1",
     "chai": "^3.5.0",
     "mocha": "^2.4.5",
+    "mocha-lcov-reporter": "^1.2.0",
     "needle": "^0.11.0",
     "ws": "^1.0.1"
-  }
+  },
+  "devDependencies": {}
 }
