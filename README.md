@@ -3,6 +3,8 @@
 
 [![npm](https://img.shields.io/npm/v/tcitsdk-nodejs.svg)](https://www.npmjs.com/package/tcitsdk-nodejs)
 
+[![Travis](https://img.shields.io/travis/MarcWang/tcitsdk-nodejs.svg)](https://travis-ci.org/MarcWang/tcitsdk-nodejs)
+
 # TCIT LocalAPI NodeJS SDK
 This repository provides NodeJS SDK for how to connect TCIT LocalAPI Service.
 
