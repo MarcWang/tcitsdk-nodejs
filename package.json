@@ -4,8 +4,9 @@
   "description": "NodeJS SDK for TCIT LocalAPI Service",
   "main": "index.js",
   "scripts": {
-    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec",
-    "coveralls": ""
+    "test": "mocha",
+    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha",
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
