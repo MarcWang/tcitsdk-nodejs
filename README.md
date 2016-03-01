@@ -296,6 +296,20 @@ localapiController.createPerson(faceId, null, null).then(function(res) {
 - @object {string} localapi
 - @object {string} nodejs
 
+```javascript
+
+var personId = null;
+/*
+call createPerson api...
+ */
+
+localapiController.deletePerson(personId).then(function(res) {
+    console.log("Call API Success");
+}).catch(function(error) {
+    console.log("Call API Error");
+});
+```
+
 ### `[API] addFaceToPerson(personId, faceId, jsonStrFeatureList)`
 
 **[Function Input]**
@@ -313,6 +327,22 @@ localapiController.createPerson(faceId, null, null).then(function(res) {
 - @object {string} localapi
 - @object {string} nodejs
 
+```javascript
+
+var personId = null;
+var faceId = null;
+/*
+get person_id from createPerson api...
+get face_id from faceDetect api...
+ */
+
+localapiController.addFaceToPerson(personId, faceId, null).then(function(res) {
+    console.log("Call API Success");
+}).catch(function(error) {
+    console.log("Call API Error");
+});
+```
+
 ### `[API] removeFaceFromPerson(personId, faceId)`
 
 **[Function Input]**
@@ -328,6 +358,21 @@ localapiController.createPerson(faceId, null, null).then(function(res) {
  
 - @object {string} localapi
 - @object {string} nodejs
+
+```javascript
+
+var personId = null;
+var faceId = null;
+/*
+existed face_id and person_id
+ */
+
+localapiController.removeFaceFromPerson(personId, faceId).then(function(res) {
+    console.log("Call API Success");
+}).catch(function(error) {
+    console.log("Call API Error");
+});
+```
 
 ### `[API] getPersonInfo(personId)`
 
@@ -346,6 +391,20 @@ localapiController.createPerson(faceId, null, null).then(function(res) {
 - @object {string} localapi
 - @object {string} nodejs
 
+```javascript
+
+var personId = null;
+/*
+existed person_id
+ */
+
+localapiController.getPersonInfo(personId).then(function(res) {
+    console.log("Call API Success");
+}).catch(function(error) {
+    console.log("Call API Error");
+});
+```
+
 ### `[API] queryPersonList()`
 
 **[Function Input]**
@@ -358,6 +417,15 @@ localapiController.createPerson(faceId, null, null).then(function(res) {
  
 - @object {string} localapi
 - @object {string} nodejs
+
+```javascript
+
+localapiController.queryPersonList().then(function(res) {
+    console.log("Call API Success");
+}).catch(function(error) {
+    console.log("Call API Error");
+});
+```
 
 ### `[API] personVerify(personId, faceId, jsonStrFeature)`
 
@@ -376,6 +444,23 @@ localapiController.createPerson(faceId, null, null).then(function(res) {
 - @object {string} localapi
 - @object {string} nodejs
 
+```javascript
+
+var personId = null;
+var faceId = null;
+var jsonStrFeature = null;
+/*
+get face_id from faceDetect api
+existed person_id 
+ */
+
+localapiController.personVerify(personId, faceId, jsonStrFeature).then(function(res) {
+    console.log("Call API Success");
+}).catch(function(error) {
+    console.log("Call API Error");
+});
+```
+
 ### `[API] imagePersonVerify(imgBuffer, personId)`
 
 **[Function Input]**
@@ -391,6 +476,21 @@ localapiController.createPerson(faceId, null, null).then(function(res) {
  
 - @object {string} localapi
 - @object {string} nodejs
+
+```javascript
+
+var personId = null;
+var imgBuffer = fs.readFileSync(__dirname + '/../../image/lena.jpg');
+/*
+existed person_id 
+ */
+
+localapiController.imagePersonVerify(imgBuffer, personId).then(function(res) {
+    console.log("Call API Success");
+}).catch(function(error) {
+    console.log("Call API Error");
+});
+```
 
 ### `[API] createGroup(personId)`
 
@@ -408,6 +508,20 @@ localapiController.createPerson(faceId, null, null).then(function(res) {
 - @object {string} localapi
 - @object {string} nodejs
 
+```javascript
+
+var personId = null;
+/*
+PreProcess
+ */
+
+localapiController.createGroup(personId).then(function(res) {
+    console.log("Call API Success");
+}).catch(function(error) {
+    console.log("Call API Error");
+});
+```
+
 ### `[API] deleteGroup(groupId)`
 
 **[Function Input]**
@@ -422,6 +536,20 @@ localapiController.createPerson(faceId, null, null).then(function(res) {
  
 - @object {string} localapi
 - @object {string} nodejs
+
+```javascript
+
+var groupId = null;
+/*
+call createPerson api...
+ */
+
+localapiController.deleteGroup(groupId).then(function(res) {
+    console.log("Call API Success");
+}).catch(function(error) {
+    console.log("Call API Error");
+});
+```
 
 ### `[API] addPersonToGroup(groupId, personId)`
 
@@ -439,6 +567,22 @@ localapiController.createPerson(faceId, null, null).then(function(res) {
 - @object {string} localapi
 - @object {string} nodejs
 
+```javascript
+
+var personId = null;
+var faceId = null;
+/*
+get groupId from createGroup api...
+get personId from createPerson api...
+ */
+
+localapiController.addPersonToGroup(groupId, personId).then(function(res) {
+    console.log("Call API Success");
+}).catch(function(error) {
+    console.log("Call API Error");
+});
+```
+
 ### `[API] removePersonFromGroup(groupId, personId)`
 
 **[Function Input]**
@@ -454,6 +598,21 @@ localapiController.createPerson(faceId, null, null).then(function(res) {
  
 - @object {string} localapi
 - @object {string} nodejs
+
+```javascript
+
+var groupId = null;
+var personId = null;
+/*
+existed group_id and person_id
+ */
+
+localapiController.removePersonFromGroup(groupId, personId).then(function(res) {
+    console.log("Call API Success");
+}).catch(function(error) {
+    console.log("Call API Error");
+});
+```
 
 ### `[API] getGroupInfo(groupId)`
 
@@ -547,19 +706,213 @@ localapiController.humanDetect(null, base64Img, null).then(function(res) {
 - @object {string} localapi
 - @object {string} nodejs
 
+```javascript
+
+localapiController.createHumanTrack().then(function(res) {
+    console.log("Call API Success");
+}).catch(function(error) {
+    console.log("Call API Error");
+});
+```
+
 ### `[API] deleteHumanTrack(trackId)`
+
+**[Function Input]**
+
+- @param {string} trackId
+
+**[Promise Resolve]**
+ 
+- @object {boolean} result
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
+```javascript
+var trackId = null;
+/*
+get trackId from createHumanTrack api
+ */
+
+localapiController.deleteHumanTrack(trackId).then(function(res) {
+    console.log("Call API Success");
+}).catch(function(error) {
+    console.log("Call API Error");
+});
+```
+
 ### `[API] openChannel(url, channelParam)`
+
+**[Function Input]**
+
+- @param {string} url
+- @param {object} channelParam
+
+**[Promise Resolve]**
+ 
+- @object {string} channel_id
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] openMultiChannels(urls, channelParam)`
+
+**[Function Input]**
+
+- @param {object} urls
+- @param {object} channelParam
+
+**[Promise Resolve]**
+ 
+- @object {string} channel_id
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] closeChannel(channelId)`
+
+**[Function Input]**
+
+- @param {string} channelId
+
+**[Promise Resolve]**
+ 
+- @object {boolean} result
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] closeAllChannels()`
+
+**[Function Input]**
+
+**[Promise Resolve]**
+ 
+- @object {boolean} result
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] getChannelInfo(channelId)`
+
+**[Function Input]**
+
+- @param {string} channelId
+
+**[Promise Resolve]**
+ 
+- @object {object} channels
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] queryChannelList()`
+
+**[Function Input]**
+
+**[Promise Resolve]**
+ 
+- @object {object} channels
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] getDeviceInfo(url)`
+
+**[Function Input]**
+
+- @param {string} url
+
+**[Promise Resolve]**
+ 
+- @object {string} url
+- @object {object} resolutions
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] queryDeviceList()`
+
+**[Function Input]**
+
+**[Promise Resolve]**
+ 
+- @object {object} devices
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] listenWebSocketMsg(callback)`
+
+**[Function Input]**
+
+- @param {function} callback
+
+**[Callback]**
+ 
+- @object {string} id
+- @object {object} data
+
 ### `[API] restartServer()`
+
+**[Function Input]**
+
+**[Promise Resolve]**
+ 
+- @object {boolean} result
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] importFeatureStr(importStr)`
+
+**[Function Input]**
+
+- @param {string} importStr
+
+**[Promise Resolve]**
+ 
+- @object {boolean} result
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
+
 ### `[API] importFeatureFile(importFile)`
+
+**[Function Input]**
+
+- @param {object} importFile
+
+**[Promise Resolve]**
+ 
+- @object {boolean} result
+
+**[Promise Reject]**
+ 
+- @object {string} localapi
+- @object {string} nodejs
 
 ## Example
 

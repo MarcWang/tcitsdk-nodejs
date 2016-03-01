@@ -12,13 +12,13 @@ function readFile(file) {
     }
 }
 
-describe('Test Person Control of TCIT LocalAPI SDK', function() {
+describe('Test Group Control of TCIT LocalAPI SDK', function() {
     var TCITLocalApi = require(__dirname + '/../../index.js');
     var localapiController = null;
     var faceId1 = null;
     var faceId2 = null;
     var personId = null;
-    var imgBuffer = null;
+    var groupId = null;
 
     // it('load', function() {});
 
@@ -29,7 +29,6 @@ describe('Test Person Control of TCIT LocalAPI SDK', function() {
         localapiController = new TCITLocalApi();
         localapiController.setServerInfo(host, port, 4662);
 
-        imgBuffer = fs.readFileSync(__dirname + '/../../image/patty.jpg');
         var buffer1 = fs.readFileSync(__dirname + '/../../image/lena.jpg');
         var buffer2 = fs.readFileSync(__dirname + '/../../image/ann.jpg');
         var base64Img1 = buffer1.toString('base64');
@@ -45,6 +44,12 @@ describe('Test Person Control of TCIT LocalAPI SDK', function() {
                 if (res.faces.length > 0) {
                     faceId2 = res.faces[0].face_id;
                 }
+                var result = localapiController.createPerson(faceId2, null, null);
+                return result.then(function(res) {
+                    personId = res.person_id;
+                }, function(err) {
+                    assert.fail(err);
+                });
             }, function(err) {
                 assert.fail(err);
             });
@@ -54,43 +59,44 @@ describe('Test Person Control of TCIT LocalAPI SDK', function() {
     });
     after(function() {});
 
-    describe('API.createPerson', function() {
-        it('should be return object, include key person_id, added_face_count and added_group_count', function() {
-            var result = localapiController.createPerson(faceId1, null, null);
+    describe('API.createGroup', function() {
+        it('should be return object, include key group_id and added_person_count', function() {
+            var result = localapiController.createGroup(personId);
             return result.then(function(res) {
-                personId = res.person_id;
-                expect(res).to.have.all.keys('person_id', 'added_face_count', 'added_group_count');
+                groupId = res.group_id;
+                expect(res).to.have.all.keys('group_id', 'added_person_count');
             }, function(err) {
                 assert.fail(err);
             });
         });
     });
 
-    describe('API.addFaceToPerson', function() {
-        it('should be return object include added_face_count = 1 ', function() {
-            var result = localapiController.addFaceToPerson(personId, faceId2, null);
+    
+    describe('API.getGroupInfo', function() {
+        it('should be return object include group_id and persons ', function() {
+            var result = localapiController.getGroupInfo(groupId);
             return result.then(function(res) {
-                expect(res).to.deep.equal({ added_face_count: 1 });
+                expect(res).to.have.all.keys('group_id', 'persons');
             }, function(err) {
                 assert.fail(err);
             });
         });
     });
 
-    describe('API.getPersonInfo', function() {
-        it('should be return object include person_id, faces and groups ', function() {
-            var result = localapiController.getPersonInfo(personId);
+    describe('API.queryGroupList', function() {
+        it('should be return object include groups ', function() {
+            var result = localapiController.queryGroupList();
             return result.then(function(res) {
-                expect(res).to.have.all.keys('person_id', 'faces', 'groups');
+                expect(res).to.have.all.keys('groups');
             }, function(err) {
                 assert.fail(err);
             });
         });
     });
 
-    describe('API.queryPersonList', function() {
-        it('should be return object include persons ', function() {
-            var result = localapiController.queryPersonList();
+    describe('API.groupIdentify', function() {
+        it('should be return object include persons', function() {
+            var result = localapiController.groupIdentify(groupId, faceId2, null);
             return result.then(function(res) {
                 expect(res).to.have.all.keys('persons');
             }, function(err) {
@@ -99,42 +105,31 @@ describe('Test Person Control of TCIT LocalAPI SDK', function() {
         });
     });
 
-    describe('API.personVerify', function() {
-        it('should be return object include confidence', function() {
-            var result = localapiController.personVerify(personId, faceId2, null);
+    describe('API.removePersonFromGroup', function() {
+        it('should be return object include removed_person_count = 1 ', function() {
+            var result = localapiController.removePersonFromGroup(groupId, personId);
             return result.then(function(res) {
-                expect(res).to.have.all.keys('confidence');
+                expect(res).to.deep.equal({ removed_person_count: 1 });
             }, function(err) {
                 assert.fail(err);
             });
         });
     });
 
-    describe('API.imagePersonVerify', function() {
-        it('should be return object include faces ', function() {
-            var result = localapiController.imagePersonVerify(imgBuffer, personId);
+    describe('API.addPersonToGroup', function() {
+        it('should be return object include added_face_count = 1 ', function() {
+            var result = localapiController.addPersonToGroup(groupId, personId);
             return result.then(function(res) {
-                expect(res).to.have.all.keys('faces');
+                expect(res).to.deep.equal({ added_person_count: 1 });
             }, function(err) {
                 assert.fail(err);
             });
         });
     });
 
-    describe('API.removeFaceFromPerson', function() {
-        it('should be return object include removed_face_count = 1 ', function() {
-            var result = localapiController.removeFaceFromPerson(personId, faceId2);
-            return result.then(function(res) {
-                expect(res).to.deep.equal({ removed_face_count: 1 });
-            }, function(err) {
-                assert.fail(err);
-            });
-        });
-    });
-
-    describe('API.deletePerson', function() {
+    describe('API.deleteGroup', function() {
         it('should be return object include delete_count', function() {
-            var result = localapiController.deletePerson(personId);
+            var result = localapiController.deleteGroup(groupId);
             return result.then(function(res) {
                 expect(res).to.have.property('delete_count')
             }, function(err) {

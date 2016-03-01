@@ -52,6 +52,11 @@ var NODEJS_STATE_TYPE_ERROR = 5001;
 var TIMEDELAY_OPEN_CHANNEL = 500; //500ms
 var TIMEOUT_OPEN_CHANNEL = 10000;
 
+var RESPONSE_TYPE_ERROR = {
+    localapi: null,
+    nodejs: NODEJS_STATE_TYPE_ERROR
+}
+
 var localapi = function() {
     var self = this;
     self.version = '1.0.4';
@@ -111,10 +116,7 @@ localapi.prototype.imageBufferUpload = function(buffer) {
     var self = this;
     return new Promise(function(resolve, reject) {
         if (typeof(buffer) != 'object') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var postData = {
@@ -156,10 +158,7 @@ localapi.prototype.imagePathUpload = function(path) {
     var self = this;
     return new Promise(function(resolve, reject) {
         if (typeof(path) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var data = {
@@ -203,10 +202,7 @@ localapi.prototype.faceDetect = function(imgId, img, trackId) {
     var self = this;
     return new Promise(function(resolve, reject) {
         if (typeof(imgId) != 'string' && typeof(img) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var data = {
@@ -275,10 +271,7 @@ localapi.prototype.deleteFaceTrack = function(trackId) {
     var self = this;
     return new Promise(function(resolve, reject) {
         if (typeof(trackId) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
         var data = {
             track_id: trackId
@@ -316,10 +309,7 @@ localapi.prototype.faceCompare = function(faceId1, faceId2) {
     return new Promise(function(resolve, reject) {
 
         if (typeof(faceId1) != 'string' || typeof(faceId2) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
         var data = {
             face_id1: faceId1,
@@ -361,18 +351,12 @@ localapi.prototype.createPerson = function(faceId, jsonStrFeatureList, groupId) 
     return new Promise(function(resolve, reject) {
 
         if (typeof(faceId) != 'string' && typeof(jsonStrFeatureList) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         if (typeof(groupId) != 'string') {
             if (groupId != null) {
-                reject({
-                    localapi: null,
-                    nodejs: NODEJS_STATE_TYPE_ERROR
-                });
+                reject(RESPONSE_TYPE_ERROR);
             }
         }
 
@@ -416,10 +400,7 @@ localapi.prototype.deletePerson = function(personId) {
     return new Promise(function(resolve, reject) {
 
         if (typeof(personId) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var data = {
@@ -460,17 +441,11 @@ localapi.prototype.addFaceToPerson = function(personId, faceId, jsonStrFeatureLi
     return new Promise(function(resolve, reject) {
 
         if (typeof(faceId) != 'string' && typeof(jsonStrFeatureList) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         if (typeof(personId) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var data = {
@@ -512,10 +487,7 @@ localapi.prototype.removeFaceFromPerson = function(personId, faceId) {
     return new Promise(function(resolve, reject) {
 
         if (typeof(personId) != 'string' || typeof(faceId) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var data = {
@@ -557,10 +529,7 @@ localapi.prototype.getPersonInfo = function(personId) {
     return new Promise(function(resolve, reject) {
 
         if (typeof(personId) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var data = {
@@ -632,17 +601,11 @@ localapi.prototype.personVerify = function(personId, faceId, jsonStrFeature) {
     return new Promise(function(resolve, reject) {
 
         if (typeof(personId) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         if (typeof(faceId) != 'string' && typeof(jsonStrFeature) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var data = {
@@ -683,17 +646,11 @@ localapi.prototype.imagePersonVerify = function(imgBuffer, personId) {
     var self = this;
     return new Promise(function(resolve, reject) {
         if (typeof(imgBuffer) != 'object') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         if (typeof(personId) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var data = {
@@ -738,10 +695,7 @@ localapi.prototype.createGroup = function(personId) {
     return new Promise(function(resolve, reject) {
         if (personId != null && typeof(personId) != 'undefined') {
             if (typeof(personId) != 'string') {
-                reject({
-                    localapi: null,
-                    nodejs: NODEJS_STATE_TYPE_ERROR
-                });
+                reject(RESPONSE_TYPE_ERROR);
             }
         }
 
@@ -782,10 +736,7 @@ localapi.prototype.deleteGroup = function(groupId) {
     return new Promise(function(resolve, reject) {
 
         if (typeof(groupId) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var data = {
@@ -825,10 +776,7 @@ localapi.prototype.addPersonToGroup = function(groupId, personId) {
     return new Promise(function(resolve, reject) {
 
         if (typeof(groupId) != 'string' || typeof(personId) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var data = {
@@ -869,10 +817,7 @@ localapi.prototype.removePersonFromGroup = function(groupId, personId) {
     return new Promise(function(resolve, reject) {
 
         if (typeof(groupId) != 'string' || typeof(personId) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var data = {
@@ -913,10 +858,7 @@ localapi.prototype.getGroupInfo = function(groupId) {
     return new Promise(function(resolve, reject) {
 
         if (typeof(groupId) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var data = {
@@ -989,17 +931,11 @@ localapi.prototype.groupIdentify = function(groupId, faceId, featureData) {
     return new Promise(function(resolve, reject) {
 
         if (typeof(groupId) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         if (typeof(faceId) != 'string' && typeof(featureData) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var data = {
@@ -1041,10 +977,7 @@ localapi.prototype.humanDetect = function(imgId, img, trackId) {
     var self = this;
     return new Promise(function(resolve, reject) {
         if (typeof(imgId) != 'string' && typeof(img) != 'string') {
-            reject({
-                localapi: null,
-                nodejs: NODEJS_STATE_TYPE_ERROR
-            });
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var data = {
@@ -1103,14 +1036,17 @@ localapi.prototype.createHumanTrack = function() {
 /* [API] Delete Human Tracked Detection
  * [Function Input]
  * @param {string} trackId
- * [Promise Return]
+ * [Promise Resovle]
  * @object {boolean} result
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.deleteHumanTrack = function(trackId) {
     var self = this;
     return new Promise(function(resolve, reject) {
         if (typeof(trackId) != 'string') {
-            reject('NodeJS SDK Error');
+            reject(RESPONSE_TYPE_ERROR);
         }
         var data = {
             track_id: trackId
@@ -1124,7 +1060,10 @@ localapi.prototype.deleteHumanTrack = function(trackId) {
                         result: true
                     });
                 } else {
-                    reject('TCIT LocalAPI Response');
+                    reject({
+                        localapi: body.state,
+                        nodejs: null
+                    });
                 }
             });
     });
@@ -1135,20 +1074,26 @@ localapi.prototype.deleteHumanTrack = function(trackId) {
  * [Function Input]
  * @param {string} url
  * @param {object} channelParam
- * [Promise Return]
+ * [Promise Resolve]
  * @object {string} channel_id
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.openChannel = function(url, channelParam) {
     var self = this;
     return new Promise(function(resolve, reject) {
 
         if (typeof(url) != 'string') {
-            reject('NodeJS SDK Error');
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         if (typeof(channelParam) != 'undefined') {
             if (typeof(channelParam) != 'object') {
-                reject('NodeJS SDK Error');
+                reject({
+                    localapi: null,
+                    nodejs: NODEJS_STATE_TYPE_ERROR
+                });
             }
         }
 
@@ -1171,7 +1116,10 @@ localapi.prototype.openChannel = function(url, channelParam) {
                     channel_id: body.channel_id
                 });
             } else {
-                reject('TCIT LocalAPI Response');
+                reject({
+                    localapi: body.state,
+                    nodejs: null
+                });
             }
         });
     });
@@ -1179,22 +1127,25 @@ localapi.prototype.openChannel = function(url, channelParam) {
 
 /* [API] Open Multi Channels
  * [Function Input]
- * @param {string} urls
+ * @param {object} urls
  * @param {object} channelParam
- * [Promise Return]
+ * [Promise Resolve]
  * @object {object} channel_ids
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.openMultiChannels = function(urls, channelParam) {
     var self = this;
     return new Promise(function(resolve, reject) {
 
         if (typeof(urls) != 'object') {
-            reject('NodeJS SDK Error');
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         if (typeof(channelParam) != 'undefined') {
             if (typeof(channelParam) != 'object') {
-                reject('NodeJS SDK Error');
+                reject(RESPONSE_TYPE_ERROR);
             }
         }
 
@@ -1203,7 +1154,10 @@ localapi.prototype.openMultiChannels = function(urls, channelParam) {
             counts = 0;
 
         if (length == 0) {
-            reject('NodeJS SDK Error');
+            reject({
+                localapi: null,
+                nodejs: NODEJS_STATE_TYPE_ERROR
+            });
         }
 
         urls.forEach(function(url) {
@@ -1219,7 +1173,10 @@ localapi.prototype.openMultiChannels = function(urls, channelParam) {
                             });
                         }
                     }).catch(function(error) {
-                        reject('NodeJS SDK Error');
+                        reject({
+                            localapi: body.state,
+                            nodejs: null
+                        });
                     });
                 }, delay);
             }());
@@ -1231,15 +1188,18 @@ localapi.prototype.openMultiChannels = function(urls, channelParam) {
 /* [API] Close Channel
  * [Function Input]
  * @param {string} channelId
- * [Promise Return]
+ * [Promise Resolve]
  * @object {boolean} result
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.closeChannel = function(channelId) {
     var self = this;
     return new Promise(function(resolve, reject) {
 
         if (typeof(channelId) != 'string') {
-            reject('NodeJS SDK Error');
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var data = {
@@ -1260,7 +1220,10 @@ localapi.prototype.closeChannel = function(channelId) {
                     result: true
                 });
             } else {
-                reject('TCIT LocalAPI Response');
+                reject({
+                    localapi: body.state,
+                    nodejs: null
+                });
             }
         });
     });
@@ -1268,8 +1231,11 @@ localapi.prototype.closeChannel = function(channelId) {
 
 /* [API] Close All Channels
  * [Function Input]
- * [Promise Return]
+ * [Promise Resolve]
  * @object {boolean} result
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.closeAllChannels = function() {
     var self = this;
@@ -1280,7 +1246,9 @@ localapi.prototype.closeAllChannels = function() {
         var counts = 0;
 
         if (channelIds.length == 0) {
-            resolve("close");
+            resolve({
+                result: true
+            });
         }
 
         channelIds.forEach(function(id) {
@@ -1292,7 +1260,10 @@ localapi.prototype.closeAllChannels = function() {
                     });
                 }
             }).catch(function(error) {
-                reject('NodeJS SDK Error');
+                reject({
+                    localapi: body.state,
+                    nodejs: null
+                });
             });
         });
     });
@@ -1301,15 +1272,18 @@ localapi.prototype.closeAllChannels = function() {
 /* [API] Get Channel Info
  * [Function Input]
  * @param {string} channelId
- * [Promise Return]
+ * [Promise Resolve]
  * @object {object} channels
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.getChannelInfo = function(channelId) {
     var self = this;
     return new Promise(function(resolve, reject) {
 
         if (typeof(channelId) != 'string') {
-            reject('NodeJS SDK Error');
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var data = {
@@ -1325,7 +1299,10 @@ localapi.prototype.getChannelInfo = function(channelId) {
                         channels: body.channels
                     });
                 } else {
-                    reject('TCIT LocalAPI Response');
+                    reject({
+                        localapi: body.state,
+                        nodejs: null
+                    });
                 }
             });
     });
@@ -1333,8 +1310,11 @@ localapi.prototype.getChannelInfo = function(channelId) {
 
 /* [API] Query Channel List
  * [Function Input]
- * [Promise Return]
+ * [Promise Resolve]
  * @object {object} channels
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.queryChannelList = function() {
     var self = this;
@@ -1347,7 +1327,10 @@ localapi.prototype.queryChannelList = function() {
                     channels: body.channels
                 });
             } else {
-                reject('TCIT LocalAPI Response');
+                reject({
+                    localapi: body.state,
+                    nodejs: null
+                });
             }
         });
     });
@@ -1356,22 +1339,23 @@ localapi.prototype.queryChannelList = function() {
 /* [API] Get Device Info
  * [Function Input]
  * @param {string} url
- * [Promise Return]
+ * [Promise Resolve]
  * @object {string} url
  * @object {object} resolutions
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.getDeviceInfo = function(url) {
     var self = this;
     return new Promise(function(resolve, reject) {
 
         if (typeof(url) != 'string') {
-            reject('NodeJS SDK Error');
+            reject(RESPONSE_TYPE_ERROR);
         }
-
         var data = {
             url: url
         }
-
         needle.post('http://' + self.server.host + ':' + self.server.port + TCIT_API_CHANNEL_DEVICE_GET_INFO, data,
             function(err, resp, body) {
                 if (err) {
@@ -1383,7 +1367,10 @@ localapi.prototype.getDeviceInfo = function(url) {
                         resolutions: body.resolutions
                     });
                 } else {
-                    reject('TCIT LocalAPI Response');
+                    reject({
+                        localapi: body.state,
+                        nodejs: null
+                    });
                 }
             });
     });
@@ -1392,8 +1379,11 @@ localapi.prototype.getDeviceInfo = function(url) {
 /* [API] Query Device List
  * [Function Input]
  * @param {string} url
- * [Promise Return]
+ * [Promise Resolve]
  * @object {object} devices
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.queryDeviceList = function() {
     var self = this;
@@ -1406,7 +1396,10 @@ localapi.prototype.queryDeviceList = function() {
                     devices: body.devices
                 });
             } else {
-                reject('TCIT LocalAPI Response');
+                reject({
+                    localapi: body.state,
+                    nodejs: null
+                });
             }
         });
     });
@@ -1446,7 +1439,7 @@ function disconnectLocalApiWebSocket(channelId) {
 /* [API] Listen WebSocket Message
  * [Function Input]
  * @param {function} callback
- * [Callback Return]
+ * [Callback]
  * @object {string} id
  * @object {object} data
  */
@@ -1480,8 +1473,11 @@ localapi.prototype.listenWebSocketMsg = function(callback) {
 
 /* [API] Restart Server
  * [Function Input]
- * [Promise Return]
+ * [Promise Resolve]
  * @object {boolean} result
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.restartServer = function() {
     var self = this;
@@ -1494,7 +1490,10 @@ localapi.prototype.restartServer = function() {
                     result: true
                 });
             } else {
-                reject('TCIT LocalAPI Response');
+                reject({
+                    localapi: body.state,
+                    nodejs: null
+                });
             }
         });
     });
@@ -1503,15 +1502,18 @@ localapi.prototype.restartServer = function() {
 /* [API] Import Feature Data
  * [Function Input]
  * @param {string} importStr
- * [Promise Return]
+ * [Promise Resolve]
  * @object {boolean} result
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.importFeatureStr = function(importStr) {
     var self = this;
     return new Promise(function(resolve, reject) {
 
         if (typeof(importStr) != 'string') {
-            reject('NodeJS SDK Error');
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var data = {
@@ -1527,7 +1529,10 @@ localapi.prototype.importFeatureStr = function(importStr) {
                         result: true
                     });
                 } else {
-                    reject('TCIT LocalAPI Response');
+                    reject({
+                        localapi: body.state,
+                        nodejs: null
+                    });
                 }
             });
     });
@@ -1536,15 +1541,18 @@ localapi.prototype.importFeatureStr = function(importStr) {
 /* [API] Import Feature Data
  * [Function Input]
  * @param {object} importFile
- * [Promise Return]
+ * [Promise Resolve]
  * @object {boolean} result
+ * [Promise Reject]
+ * @object {string} localapi
+ * @object {string} nodejs
  */
 localapi.prototype.importFeatureFile = function(importFile) {
     var self = this;
     return new Promise(function(resolve, reject) {
 
         if (typeof(importFile) != 'object') {
-            reject('NodeJS SDK Error');
+            reject(RESPONSE_TYPE_ERROR);
         }
 
         var data = {
@@ -1561,7 +1569,10 @@ localapi.prototype.importFeatureFile = function(importFile) {
                     result: true
                 });
             } else {
-                reject('TCIT LocalAPI Response');
+                reject({
+                    localapi: body.state,
+                    nodejs: null
+                });
             }
         });
     });
