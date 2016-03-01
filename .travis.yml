@@ -1,7 +1,10 @@
 language: node_js
 before_install:
+  - npm install chai -g
   - npm install mocha -g
   - npm install mocha-lcov-reporter -g
+  - npm install istanbul -g
+  - npm install coveralls -g
 
 node_js:
   - "4.3.0"
