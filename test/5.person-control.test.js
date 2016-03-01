@@ -13,7 +13,7 @@ function readFile(file) {
 }
 
 describe('Test Person Control of TCIT LocalAPI SDK', function() {
-    var TCITLocalApi = require(__dirname + '/../../index.js');
+    var TCITLocalApi = require(__dirname + '/../index.js');
     var localapiController = null;
     var faceId1 = null;
     var faceId2 = null;
@@ -29,9 +29,9 @@ describe('Test Person Control of TCIT LocalAPI SDK', function() {
         localapiController = new TCITLocalApi();
         localapiController.setServerInfo(host, port, 4662);
 
-        imgBuffer = fs.readFileSync(__dirname + '/../../image/patty.jpg');
-        var buffer1 = fs.readFileSync(__dirname + '/../../image/lena.jpg');
-        var buffer2 = fs.readFileSync(__dirname + '/../../image/ann.jpg');
+        imgBuffer = fs.readFileSync(__dirname + '/../image/patty.jpg');
+        var buffer1 = fs.readFileSync(__dirname + '/../image/lena.jpg');
+        var buffer2 = fs.readFileSync(__dirname + '/../image/ann.jpg');
         var base64Img1 = buffer1.toString('base64');
         var base64Img2 = buffer2.toString('base64');
 

@@ -5,3 +5,5 @@ before_install:
 
 node_js:
   - "4.3.0"
+
+after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"

@@ -4,7 +4,7 @@
   "description": "NodeJS SDK for TCIT LocalAPI Service",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/mocha/*.js",
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec",
     "coveralls": ""
   },
   "repository": {
@@ -28,11 +28,13 @@
   "homepage": "https://github.com/MarcWang/tcitsdk-nodejs#readme",
   "dependencies": {
     "bluebird": "^3.1.1",
-    "chai": "^3.5.0",
-    "mocha": "^2.4.5",
-    "mocha-lcov-reporter": "^1.2.0",
     "needle": "^0.11.0",
     "ws": "^1.0.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.8",
+    "mocha": "^2.4.5",
+    "mocha-lcov-reporter": "^1.2.0"
+  }
 }

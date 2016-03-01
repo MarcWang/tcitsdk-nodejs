@@ -13,15 +13,15 @@ function readFile(file) {
 }
 
 describe('Test Image Upload API of TCIT LocalAPI SDK', function() {
-    var TCITLocalApi = require(__dirname + '/../../index.js');
+    var TCITLocalApi = require(__dirname + '/../index.js');
     var localapiController = null;
     var buffer = null;
     var path = null;
     // it('load', function() {});
 
     before(function() {
-        buffer = fs.readFileSync(__dirname + '/../../image/lena.jpg');
-        path = __dirname + '/../../image/lena.jpg';
+        buffer = fs.readFileSync(__dirname + '/../image/lena.jpg');
+        path = __dirname + '/../image/lena.jpg';
         var cfgSetting = readFile(__dirname + '/config.json');
         var host = cfgSetting.server.host;
         var port = parseInt(cfgSetting.server.port, 10);

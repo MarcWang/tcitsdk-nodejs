@@ -12,7 +12,7 @@ function readFile(file) {
 }
 
 describe('Test Setting API of TCIT LocalAPI SDK', function() {
-    var TCITLocalApi = require(__dirname + '/../../index.js');
+    var TCITLocalApi = require(__dirname + '/../index.js');
     var cfgSetting = null,
         host = null,
         port = null;
