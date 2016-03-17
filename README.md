@@ -64,7 +64,7 @@ Set information of TCIT LocalAPI service
 var TCITLocalApi = require('tcitsdk-nodejs');
 var localapiController = new TCITLocalApi();
 
-localapiController.setServerInfo('localhost', "8800", "4662");
+localapiController.setServerInfo('localhost', 8800, 4662);
 ```
 
 ### `[API] imageBufferUpload(buffer)`
