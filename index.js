@@ -944,8 +944,9 @@ localapi.prototype.groupIdentify = function(groupId, faceId, featureData) {
             face_id: faceId
         }
 
-        needle.post('http://' + self.server.host + ':' + self.server.port + TCIT_API_GROUP_IDENTIFY, data,
-            function(err, resp, body) {
+        needle.post('http://' + self.server.host + ':' + self.server.port + TCIT_API_GROUP_IDENTIFY, data, {
+            timeout: 10000
+        }, function(err, resp, body) {
                 if (err) {
                     reject(err);
                 } else if (body.state == TCIT_STATE_SUCCESSFUL) {

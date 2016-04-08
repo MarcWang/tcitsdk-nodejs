@@ -74,9 +74,15 @@ function identifyPerson() {
             if (faces.length > 0) {
                 var face = faces[0];
                 jsonStrFeature = face.featureData;
+                var beginTime = new Date();
                 return localapiController.groupIdentify(groupId, null, jsonStrFeature).then(function(res) {
                     console.log("-----------------------------------------------------------------");
                     console.log("Test API groupIdentify Success");
+                    var endTime = new Date();
+                    var diff = endTime.valueOf() - beginTime.valueOf();
+                    console.log(beginTime);
+                    console.log(endTime);
+                    console.log(diff);
                     // console.log(res);
                 });
             }
@@ -86,11 +92,30 @@ function identifyPerson() {
     });
 }
 
+var count = 0;
+var flag = true;
 
 createGroup(function(res) {
-    registPerson(function(res) {
-        if (res.result) {
-            identifyPerson();
+    setInterval(function() {
+        if (flag) {
+            count++;
+            console.log(count);
+            if (count == 10000) {
+                flag = false;
+                identifyPerson();
+            }
+            registPerson(function(res) {
+                if (res.result) {
+                } else {
+                    console.log("err");
+                    localapiController.queryPersonList(res).then(function(res) {
+                        console.log(res.persons.length);
+                    })
+                }
+            })
+        } else {
+            return;
         }
-    })
+
+    }, 100);
 });
